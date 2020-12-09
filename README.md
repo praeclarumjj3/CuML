@@ -6,7 +6,7 @@ This repo contains code for various ML/DL algorithms/models implemented using **
 
 ## Repository Structure
 
-- [CuCNN](https://github.com/praeclarumjj3/CuML/CuCNN/): Contains a CNN implemented using CUDA on MNIST dataset.
+- [CuCNN](https://github.com/praeclarumjj3/CuML/tree/master/CuCNN): Contains a CNN implemented using CUDA on MNIST dataset.
 
 ## Setup
 
