@@ -1,2 +1,0 @@
-C:\Users\Hardik\source\repos\SVM Cuda\x64\Debug\SVM Cuda.exe
-C:\Users\Hardik\source\repos\SVM Cuda\x64\Debug\SVM Cuda.pdb
