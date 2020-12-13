@@ -34,3 +34,12 @@ drive.mount('/content/gdrive')
 ! ./pca testcases/testcase_4_4 50
 ```
 
+## Generate Random Test Case
+
+Script `gen_testcase.py` generates testcases as per the parameters and output the generated testcase in file `testcase_<M>_<N>` in the desired format. You might need to change the values of variables `M` and `N` in the script. Read the comments in the script for more information.
+
+```
+! python3 testcases/gen_testcase.py
+! mv testcase_M_N testcase/
+```
+
