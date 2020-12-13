@@ -40,6 +40,6 @@ Script `gen_testcase.py` generates testcases as per the parameters and output th
 
 ```
 ! python3 testcases/gen_testcase.py
-! mv testcase_M_N testcase/
+! mv testcase_M_N testcases/
 ```
 
