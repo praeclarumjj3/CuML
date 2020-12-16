@@ -6,36 +6,33 @@ This repo contains code for various ML/DL algorithms/models implemented using **
 
 ## Repository Structure
 
-- [CuCNN](https://github.com/praeclarumjj3/CuML/tree/master/CuCNN): Contains a CNN implemented using CUDA on MNIST dataset.
+- [CuCNN](https://github.com/praeclarumjj3/CuML/tree/master/CuCNN): Contains a simple CNN implemented using CUDA on the MNIST dataset.
+
+- [CuDecisionTree](https://github.com/praeclarumjj3/CuML/tree/master/CuDecisionTree): Contains the Decision Tree algorithm implemented using CUDA.
+
+- [CuNaiveBayes](https://github.com/praeclarumjj3/CuML/tree/master/CuNaiveBayes): Contains the Naive Bayes algorithm implemented using CUDA.
+
+- [CuSVD](https://github.com/praeclarumjj3/CuML/tree/master/CuSVD): Contains the SVD algorithm implemented using CUDA.
+
+- [CuSVM](https://github.com/praeclarumjj3/CuML/tree/master/CuSVM): Contains a simple SVM implemented using CUDA.
 
 ## Setup
-
-Steps to test the code on **Google Colab**.
-
-- Mount google drive to the colab notebook:
-
-```
-from google.colab import drive
-drive.mount('/content/gdrive')
-```
 
 - Clone the repo using:
 ```
 ! git clone https://github.com/praeclarumjj3/CuML.git
 ```
 
-- Navigate to the folder of the algorithm you want to test using:
-```
-%cd /content/gdrive/My Drive/CuML/[Folder_Name]
-```
+**Check README.md of each algorithm to see the setup instructions.**
 
-- Compile the code using:
+## Contributors
 
-```
-! make
-```
+- **CuCNN**: Jitesh Jain
 
-- Run the executable using:
-```
-! ./[Algotithm_Name] 
-```
+- **CuSVD**: Anurag Bansal 
+
+- **CuNaiveBayes**: Anushka Singh
+
+- **CuSVM**: Hardik Thami
+
+- **CuDecisionTree**: Anshika Mittal
