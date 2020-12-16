@@ -2,7 +2,7 @@
 
 A simple 3-layer CNN architecture implemented using CUDA framework.
 
-<img src='images/cucnn.png' style="max-width:70%">
+<img src='images/cucnn.png' style="max-width:100%">
 
 ## Code Structure
 
@@ -67,7 +67,8 @@ We perform experiments with two settings:
   <summary>
     Epochs = 50
   </summary>
-  Total Training Time : 272.405225 seconds (4.54 minutes)
+  Total Training Time : 272.405225 seconds (4.54 minutes),
+  
   Test Accuracy: 97.12%
 </details>
 
@@ -75,7 +76,8 @@ We perform experiments with two settings:
   <summary>
     Epochs = 100
   </summary>
-  Total Training Time : 546.414189 seconds (9.1 minutes)
+  Total Training Time : 546.414189 seconds (9.1 minutes),
+  
   Test Accuracy: 97.41%
 </details>
 
@@ -86,20 +88,24 @@ The experiments were performed on 60000 images present in the MNIST dataset.
 The losses for the two settings are:
 
 - **Epochs = 50**
-    Training Time: **4.54 minutes**
+    
+    - Training Time: **4.54 minutes**
 
     <img src='images/train_50.png' style="max-width:100%">
 
 - **Epochs = 1000**
-    Training Time: **9.1 minutes**
+    
+    - Training Time: **9.1 minutes**
 
     <img src='images/train_100.png' style="max-width:100%">
 
 ### Test
 
 - **Epochs = 50**
-    Accuracy: **97.12%**
+    
+    - Accuracy: **97.12%**
 
 
 - **Epochs = 1000**
-    Accuracy: **97.41%**
+    
+    - Accuracy: **97.41%**
