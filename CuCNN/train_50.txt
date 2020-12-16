@@ -1,0 +1,54 @@
+Training Started!
+Epoch 1 => Training Error: 0.242531, Execution GPU Time: 5.537256
+Epoch 2 => Training Error: 0.159991, Execution GPU Time: 11.000059
+Epoch 3 => Training Error: 0.143461, Execution GPU Time: 16.447014
+Epoch 4 => Training Error: 0.135349, Execution GPU Time: 21.894426
+Epoch 5 => Training Error: 0.130146, Execution GPU Time: 27.333610
+Epoch 6 => Training Error: 0.126468, Execution GPU Time: 32.743454
+Epoch 7 => Training Error: 0.123606, Execution GPU Time: 38.198487
+Epoch 8 => Training Error: 0.121226, Execution GPU Time: 43.674032
+Epoch 9 => Training Error: 0.119280, Execution GPU Time: 49.117987
+Epoch 10 => Training Error: 0.117592, Execution GPU Time: 54.555804
+Epoch 11 => Training Error: 0.116074, Execution GPU Time: 60.004170
+Epoch 12 => Training Error: 0.114716, Execution GPU Time: 65.441185
+Epoch 13 => Training Error: 0.113477, Execution GPU Time: 70.876541
+Epoch 14 => Training Error: 0.112334, Execution GPU Time: 76.319582
+Epoch 15 => Training Error: 0.111259, Execution GPU Time: 81.760289
+Epoch 16 => Training Error: 0.110274, Execution GPU Time: 87.194413
+Epoch 17 => Training Error: 0.109381, Execution GPU Time: 92.629454
+Epoch 18 => Training Error: 0.108553, Execution GPU Time: 98.079750
+Epoch 19 => Training Error: 0.107784, Execution GPU Time: 103.508661
+Epoch 20 => Training Error: 0.107066, Execution GPU Time: 108.917100
+Epoch 21 => Training Error: 0.106391, Execution GPU Time: 114.345270
+Epoch 22 => Training Error: 0.105753, Execution GPU Time: 119.773740
+Epoch 23 => Training Error: 0.105139, Execution GPU Time: 125.203074
+Epoch 24 => Training Error: 0.104549, Execution GPU Time: 130.639747
+Epoch 25 => Training Error: 0.103985, Execution GPU Time: 136.084604
+Epoch 26 => Training Error: 0.103451, Execution GPU Time: 141.552062
+Epoch 27 => Training Error: 0.102949, Execution GPU Time: 146.989416
+Epoch 28 => Training Error: 0.102479, Execution GPU Time: 152.455709
+Epoch 29 => Training Error: 0.102035, Execution GPU Time: 157.908502
+Epoch 30 => Training Error: 0.101610, Execution GPU Time: 163.351023
+Epoch 31 => Training Error: 0.101206, Execution GPU Time: 168.793173
+Epoch 32 => Training Error: 0.100823, Execution GPU Time: 174.201350
+Epoch 33 => Training Error: 0.100462, Execution GPU Time: 179.663156
+Epoch 34 => Training Error: 0.100119, Execution GPU Time: 185.164317
+Epoch 35 => Training Error: 0.099792, Execution GPU Time: 190.577960
+Epoch 36 => Training Error: 0.099478, Execution GPU Time: 196.026812
+Epoch 37 => Training Error: 0.099177, Execution GPU Time: 201.494373
+Epoch 38 => Training Error: 0.098884, Execution GPU Time: 206.924865
+Epoch 39 => Training Error: 0.098604, Execution GPU Time: 212.411569
+Epoch 40 => Training Error: 0.098332, Execution GPU Time: 217.906055
+Epoch 41 => Training Error: 0.098070, Execution GPU Time: 223.358736
+Epoch 42 => Training Error: 0.097819, Execution GPU Time: 228.858131
+Epoch 43 => Training Error: 0.097576, Execution GPU Time: 234.307779
+Epoch 44 => Training Error: 0.097341, Execution GPU Time: 239.749736
+Epoch 45 => Training Error: 0.097114, Execution GPU Time: 245.168888
+Epoch 46 => Training Error: 0.096893, Execution GPU Time: 250.591536
+Epoch 47 => Training Error: 0.096678, Execution GPU Time: 256.041266
+Epoch 48 => Training Error: 0.096470, Execution GPU Time: 261.494929
+Epoch 49 => Training Error: 0.096268, Execution GPU Time: 266.949814
+Epoch 50 => Training Error: 0.096075, Execution GPU Time: 272.405225
+
+ Total Execution Time : 272.405225
+Accuracy: 97.12%

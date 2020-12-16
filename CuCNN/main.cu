@@ -134,15 +134,15 @@ static void learn()
 	static cublasHandle_t blas;
 	cublasCreate(&blas);
 
-	float err;
-	int iter = 50;
+	float train_error;
+	int numEpochs = 50;
 	
 	double time_taken = 0.0;
 
-	fprintf(stdout ,"Learning\n");
+	fprintf(stdout ,"Training Started!\n");
 
-	while (iter < 0 || iter-- > 0) {
-		err = 0.0f;
+	while (numEpochs-- > 0) {
+		train_error = 0.0f;
 
 		for (int i = 0; i < train_cnt; ++i) {
 			float tmp_err;
@@ -156,22 +156,22 @@ static void learn()
 			// Euclid distance of train_set[i]
 			makeError<<<10, 1>>>(l_f.d_preact, l_f.output, train_set[i].label, 10);
 			cublasSnrm2(blas, 10, l_f.d_preact, 1, &tmp_err);
-			err += tmp_err;
+			train_error += tmp_err;
 
 			time_taken += back_pass();
 		}
 
-		err /= train_cnt;
-		fprintf(stdout, "error: %e, time_on_gpu: %lf\n", err, time_taken);
+		train_error /= train_cnt;
+		fprintf(stdout, "Epoch %d => Training Error: %f, Execution GPU Time: %lf\n",50-numEpochs, train_error, time_taken);
 
-		if (err < threshold) {
-			fprintf(stdout, "Training complete, error less than threshold\n\n");
+		if (train_error < threshold) {
+			fprintf(stdout, "Early Stopping, Training Error less than threshold\n\n");
 			break;
 		}
 
 	}
 	
-	fprintf(stdout, "\n Time - %lf\n", time_taken);
+	fprintf(stdout, "\n Total Execution Time: %lf\n", time_taken);
 }
 
 
@@ -206,6 +206,6 @@ static void test()
 		}
 	}
 
-	fprintf(stdout, "Error Rate: %.2lf%%\n",
-		double(error) / double(test_cnt) * 100.0);
+	fprintf(stdout, "Accuracy: %.2lf%%\n",
+		(1 - double(error) / double(test_cnt))* 100.0);
 }

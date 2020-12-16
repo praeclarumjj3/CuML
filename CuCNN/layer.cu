@@ -108,7 +108,7 @@ __global__ void apply_grad(float *output, float *grad, const int N)
 	const int size = blockDim.x * gridDim.x;
 
 	for (int idx = N * pos / size; idx < N * (pos+1) / size; ++idx) {
-		output[idx] += dt * grad[idx];
+		output[idx] += lr * grad[idx];
 	}
 }
 
@@ -240,7 +240,7 @@ __global__ void bp_bias_f(float bias[10], float d_preact[10])
 	const int N = 10;
 
 	for (int idx = N * pos / size; idx < N * (pos+1) / size; ++idx) {
-		bias[idx] += dt * d_preact[idx];
+		bias[idx] += lr * d_preact[idx];
 	}
 }
 
@@ -316,7 +316,7 @@ __global__ void bp_bias_s1(float bias[1], float d_preact[6][6][6])
 		const int i2 = ((idx /= 6	) % 6);
 		const int i3 = ((idx /= 6	) % 6);
 
-		atomicAdd(&bias[0], dt * d_preact[i1][i2][i3] / d);
+		atomicAdd(&bias[0], lr * d_preact[i1][i2][i3] / d);
 	}
 }
 
@@ -393,6 +393,6 @@ __global__ void bp_bias_c1(float bias[6], float d_preact[6][24][24])
 		const int i2 = ((idx /= 6	) % 24);
 		const int i3 = ((idx /= 24	) % 24);
 
-		atomicAdd(&bias[i1], dt * d_preact[i1][i2][i3] / d);
+		atomicAdd(&bias[i1], lr * d_preact[i1][i2][i3] / d);
 	}
 }

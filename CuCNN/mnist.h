@@ -167,4 +167,3 @@ cleanup:
 
 #endif /* USE_MNIST_LOADER */
 #endif /* __MNIST_H__ */
-

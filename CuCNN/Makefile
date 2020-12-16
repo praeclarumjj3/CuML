@@ -1,5 +1,5 @@
 all:
-	nvcc -lcuda -lcublas *.cu -o CNN 
+	nvcc -lcuda -lcublas *.cu -o CNN
 
 run:
 	./CNN
