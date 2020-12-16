@@ -83,29 +83,69 @@ We perform experiments with two settings:
 
 The experiments were performed on 60000 images present in the MNIST dataset.
 
+**Observations:**
+
+- Performance of the model depends on **GridSize (number of blocks in a grid/kernel)** and **BlockSize (number of threads in a block)**. 
+
+- Products of the high order (*16<sup>th<sup> power of 2*) give inaccurate results as compared to those of *lower powers of 2*.
+
+- As the product becomes smaller, even if accuracy remains the same, training time increases (*2<sup>8</sup> order* v/s *2<sup>12</sup> order*).
+
+- Products of the **same order** (*power of 2*) give almost the same results (`in terms of time and accuracy`).
+
 ### Train
 
 The losses for the two settings are:
 
-- **Epochs = 50**
+- **Epochs = 50, Kernel = <<< 64,64 >>>**: *2<sup>12</sup> order*
     
     - Training Time: **4.54 minutes**
 
     <img src='images/train_50.png' style="max-width:100%">
 
-- **Epochs = 100**
+- **Epochs = 100, Kernel = <<< 64,64 >>>**: *2<sup>12</sup> order*
     
-    - Training Time: **9.1 minutes**
+    - Training Time: **9.10 minutes**
 
     <img src='images/train_100.png' style="max-width:100%">
 
+- **Epochs = 50, Kernel = <<< 128,512 >>>**: *2<sup>16</sup> order*
+    
+    - Training Time: **4.86 minutes**
+
+    <img src='images/2_16.png' style="max-width:100%">
+
+- **Epochs = 50, Kernel = <<< 256,256 >>>**: *2<sup>16</sup> order*
+    
+    - Training Time: **4.93 minutes**
+
+    <img src='images/2_16_2.png' style="max-width:100%">
+
+- **Epochs = 50, Kernel = <<< 16,16 >>>**: *2<sup>8</sup> order*
+    
+    - Training Time: **10.02 minutes**
+
+    <img src='images/2_8.png' style="max-width:100%">
+
 ### Test
 
-- **Epochs = 50**
+- **Epochs = 50, Kernel = <<< 64,64 >>>**: *2<sup>12</sup> order*
     
     - Accuracy: **97.12%**
 
 
-- **Epochs = 100**
+- **Epochs = 100, Kernel = <<< 64,64 >>>**: *2<sup>12</sup> order*
     
     - Accuracy: **97.41%**
+
+- **Epochs = 50, Kernel = <<< 128,512 >>>**: *2<sup>16</sup> order*
+    
+    - Accuracy: **87.92%**
+
+- **Epochs = 50, Kernel = <<< 256,256 >>>**: *2<sup>16</sup> order*
+    
+    - Accuracy: **87.92%**
+
+- **Epochs = 50, Kernel = <<< 16,16 >>>**: *2<sup>8</sup> order*
+    
+    - Accuracy: **97.12%**
