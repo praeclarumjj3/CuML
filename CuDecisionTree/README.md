@@ -1,11 +1,11 @@
-#CuDecisonTree
+# CuDecisonTree
 It contains code for Decision Tree algorithm implmented using CUDA.
 
-##Setup
+## Setup
 Run the code using:
 ```
--! nvcc -arch=sm_50 project.cu timer.c DecisionTreeCuda.cpp -o project
+! nvcc -arch=sm_50 project.cu timer.c DecisionTreeCuda.cpp -o project
 ```
 ```
--! ./project 200000 784
+! ./project 200000 784
 ```
