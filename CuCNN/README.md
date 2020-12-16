@@ -93,7 +93,7 @@ The losses for the two settings are:
 
     <img src='images/train_50.png' style="max-width:100%">
 
-- **Epochs = 1000**
+- **Epochs = 100**
     
     - Training Time: **9.1 minutes**
 
@@ -106,6 +106,6 @@ The losses for the two settings are:
     - Accuracy: **97.12%**
 
 
-- **Epochs = 1000**
+- **Epochs = 100**
     
     - Accuracy: **97.41%**
