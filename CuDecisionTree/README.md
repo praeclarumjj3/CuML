@@ -9,4 +9,4 @@ Run the code using:
 ```
 ! ./project 200000 784
 ```
-<img src="CuDecisionTree/readme_images/code_run.jpeg">
+<img src="readme_images/code_run.jpeg">
