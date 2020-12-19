@@ -4,6 +4,20 @@ A simple 3-layer CNN architecture implemented using CUDA framework.
 
 <img src='images/cucnn.png' style="max-width:100%">
 
+The CNN consists of:
+
+- **Convolution Layer**: Applies a Convolution Operation with `6` **5x5** kernels with `stride=1` on the input image to output a map of `shape=24x24x6`.
+
+- **Separable Convolution Layer**: Applies a **shared** Separable Convolution Operation with a **4x4** kernel with `stride=4` on the output of the previous Conv layer to output a map of `shape=4x4x6`.
+
+- **Fully Connected Layer**: Flattens the output from the previous layer to a layer with `10 nodes` with each node's value representing the probability of a digit from **0-9**.
+
+## Implementation 
+
+- Used simple **float multi-dimensional arrays** to implement the `parameter structures` (weights and biases) and outputs for the CNN.
+
+- The best performing kernel sizes are: **GridSize = 64, BlockSize = 64**, i.e, `kernel <<<64,64>>>`
+
 ## Code Structure
 
 - `data/`: Contains the **testset** and **trainset** MNIST data.
