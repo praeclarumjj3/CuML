@@ -148,7 +148,7 @@ __global__ void fp_bias_Conv(float preact[6][24][24], float bias[6])
 	}
 }
 
-__global__ void fp_preact_separableConv(float input[6][24][24], float preact[6][6][6], float weight[1][4][4])
+__global__ void fp_preact_sharedConv(float input[6][24][24], float preact[6][6][6], float weight[1][4][4])
 {
 	const int pos = blockIdx.x * blockDim.x + threadIdx.x;
 	const int size = blockDim.x * gridDim.x;
@@ -167,7 +167,7 @@ __global__ void fp_preact_separableConv(float input[6][24][24], float preact[6][
 	}
 }
 
-__global__ void fp_bias_separableConv(float preact[6][6][6], float bias[1])
+__global__ void fp_bias_sharedConv(float preact[6][6][6], float bias[1])
 {
 	const int pos = blockIdx.x * blockDim.x + threadIdx.x;
 	const int size = blockDim.x * gridDim.x;
@@ -244,7 +244,7 @@ __global__ void bp_bias_FC(float bias[10], float d_preact[10])
 	}
 }
 
-__global__ void bp_output_separableConv(float d_output[6][6][6], float n_weight[10][6][6][6], float nd_preact[10])
+__global__ void bp_output_sharedConv(float d_output[6][6][6], float n_weight[10][6][6][6], float nd_preact[10])
 {
 	const int pos = blockIdx.x * blockDim.x + threadIdx.x;
 	const int size = blockDim.x * gridDim.x;
@@ -262,7 +262,7 @@ __global__ void bp_output_separableConv(float d_output[6][6][6], float n_weight[
 	}
 }
 
-__global__ void bp_preact_separableConv(float d_preact[6][6][6], float d_output[6][6][6], float preact[6][6][6])
+__global__ void bp_preact_sharedConv(float d_preact[6][6][6], float d_output[6][6][6], float preact[6][6][6])
 {
 	const int pos = blockIdx.x * blockDim.x + threadIdx.x;
 	const int size = blockDim.x * gridDim.x;
@@ -281,7 +281,7 @@ __global__ void bp_preact_separableConv(float d_preact[6][6][6], float d_output[
 	}
 }
 
-__global__ void bp_weight_separableConv(float d_weight[1][4][4], float d_preact[6][6][6], float p_output[6][24][24])
+__global__ void bp_weight_sharedConv(float d_weight[1][4][4], float d_preact[6][6][6], float p_output[6][24][24])
 {
 	const int pos = blockIdx.x * blockDim.x + threadIdx.x;
 	const int size = blockDim.x * gridDim.x;
@@ -302,7 +302,7 @@ __global__ void bp_weight_separableConv(float d_weight[1][4][4], float d_preact[
 	}
 }
 
-__global__ void bp_bias_separableConv(float bias[1], float d_preact[6][6][6])
+__global__ void bp_bias_sharedConv(float bias[1], float d_preact[6][6][6])
 {
 	const int pos = blockIdx.x * blockDim.x + threadIdx.x;
 	const int size = blockDim.x * gridDim.x;

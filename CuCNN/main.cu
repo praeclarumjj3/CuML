@@ -13,7 +13,7 @@ static unsigned int train_cnt, test_cnt;
 // Define layers of CNN
 static Layer l_input = Layer(0, 0, 28*28);
 static Layer l_Conv = Layer(5*5, 6, 24*24*6);
-static Layer l_separableConv = Layer(4*4, 1, 6*6*6);
+static Layer l_sharedConv = Layer(4*4, 1, 6*6*6);
 static Layer l_FC = Layer(6*6*6, 10, 10);
 
 static void learn();
@@ -60,7 +60,7 @@ static double forward_pass(double data[28][28])
 
 	l_input.clear();
 	l_Conv.clear();
-	l_separableConv.clear();
+	l_sharedConv.clear();
 	l_FC.clear();
 
 	clock_t start, end;
@@ -72,11 +72,11 @@ static double forward_pass(double data[28][28])
 	fp_bias_Conv<<<64, 64>>>((float (*)[24][24])l_Conv.preact, l_Conv.bias);
 	apply_step_function<<<64, 64>>>(l_Conv.preact, l_Conv.output, l_Conv.O);
 
-	fp_preact_separableConv<<<64, 64>>>((float (*)[24][24])l_Conv.output, (float (*)[6][6])l_separableConv.preact, (float (*)[4][4])l_separableConv.weight);
-	fp_bias_separableConv<<<64, 64>>>((float (*)[6][6])l_separableConv.preact, l_separableConv.bias);
-	apply_step_function<<<64, 64>>>(l_separableConv.preact, l_separableConv.output, l_separableConv.O);
+	fp_preact_sharedConv<<<64, 64>>>((float (*)[24][24])l_Conv.output, (float (*)[6][6])l_sharedConv.preact, (float (*)[4][4])l_sharedConv.weight);
+	fp_bias_sharedConv<<<64, 64>>>((float (*)[6][6])l_sharedConv.preact, l_sharedConv.bias);
+	apply_step_function<<<64, 64>>>(l_sharedConv.preact, l_sharedConv.output, l_sharedConv.O);
 
-	fp_preact_FC<<<64, 64>>>((float (*)[6][6])l_separableConv.output, l_FC.preact, (float (*)[6][6][6])l_FC.weight);
+	fp_preact_FC<<<64, 64>>>((float (*)[6][6])l_sharedConv.output, l_FC.preact, (float (*)[6][6][6])l_FC.weight);
 	fp_bias_FC<<<64, 64>>>(l_FC.preact, l_FC.bias);
 	apply_step_function<<<64, 64>>>(l_FC.preact, l_FC.output, l_FC.O);
 	
@@ -91,22 +91,22 @@ static double back_pass()
 
 	start = clock();
 
-	bp_weight_FC<<<64, 64>>>((float (*)[6][6][6])l_FC.d_weight, l_FC.d_preact, (float (*)[6][6])l_separableConv.output);
+	bp_weight_FC<<<64, 64>>>((float (*)[6][6][6])l_FC.d_weight, l_FC.d_preact, (float (*)[6][6])l_sharedConv.output);
 	bp_bias_FC<<<64, 64>>>(l_FC.bias, l_FC.d_preact);
 
-	bp_output_separableConv<<<64, 64>>>((float (*)[6][6])l_separableConv.d_output, (float (*)[6][6][6])l_FC.weight, l_FC.d_preact);
-	bp_preact_separableConv<<<64, 64>>>((float (*)[6][6])l_separableConv.d_preact, (float (*)[6][6])l_separableConv.d_output, (float (*)[6][6])l_separableConv.preact);
-	bp_weight_separableConv<<<64, 64>>>((float (*)[4][4])l_separableConv.d_weight, (float (*)[6][6])l_separableConv.d_preact, (float (*)[24][24])l_Conv.output);
-	bp_bias_separableConv<<<64, 64>>>(l_separableConv.bias, (float (*)[6][6])l_separableConv.d_preact);
+	bp_output_sharedConv<<<64, 64>>>((float (*)[6][6])l_sharedConv.d_output, (float (*)[6][6][6])l_FC.weight, l_FC.d_preact);
+	bp_preact_sharedConv<<<64, 64>>>((float (*)[6][6])l_sharedConv.d_preact, (float (*)[6][6])l_sharedConv.d_output, (float (*)[6][6])l_sharedConv.preact);
+	bp_weight_sharedConv<<<64, 64>>>((float (*)[4][4])l_sharedConv.d_weight, (float (*)[6][6])l_sharedConv.d_preact, (float (*)[24][24])l_Conv.output);
+	bp_bias_sharedConv<<<64, 64>>>(l_sharedConv.bias, (float (*)[6][6])l_sharedConv.d_preact);
 
-	bp_output_Conv<<<64, 64>>>((float (*)[24][24])l_Conv.d_output, (float (*)[4][4])l_separableConv.weight, (float (*)[6][6])l_separableConv.d_preact);
+	bp_output_Conv<<<64, 64>>>((float (*)[24][24])l_Conv.d_output, (float (*)[4][4])l_sharedConv.weight, (float (*)[6][6])l_sharedConv.d_preact);
 	bp_preact_Conv<<<64, 64>>>((float (*)[24][24])l_Conv.d_preact, (float (*)[24][24])l_Conv.d_output, (float (*)[24][24])l_Conv.preact);
 	bp_weight_Conv<<<64, 64>>>((float (*)[5][5])l_Conv.d_weight, (float (*)[24][24])l_Conv.d_preact, (float (*)[28])l_input.output);
 	bp_bias_Conv<<<64, 64>>>(l_Conv.bias, (float (*)[24][24])l_Conv.d_preact);
 
 
 	apply_grad<<<64, 64>>>(l_FC.weight, l_FC.d_weight, l_FC.M * l_FC.N);
-	apply_grad<<<64, 64>>>(l_separableConv.weight, l_separableConv.d_weight, l_separableConv.M * l_separableConv.N);
+	apply_grad<<<64, 64>>>(l_sharedConv.weight, l_sharedConv.d_weight, l_sharedConv.M * l_sharedConv.N);
 	apply_grad<<<64, 64>>>(l_Conv.weight, l_Conv.d_weight, l_Conv.M * l_Conv.N);
 
 	end = clock();
@@ -150,7 +150,7 @@ static void learn()
 			time_taken += forward_pass(train_set[i].data);
 
 			l_FC.bp_clear();
-			l_separableConv.bp_clear();
+			l_sharedConv.bp_clear();
 			l_Conv.bp_clear();
 
 			// Euclid distance of train_set[i]
