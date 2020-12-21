@@ -1,6 +1,6 @@
 # CuCNN
 
-A simple 3-layer CNN architecture implemented using CUDA framework.
+A simple 3-layer CNN architecture for **Image Classification** on [MNIST](http://yann.lecun.com/exdb/mnist/) implemented using CUDA.
 
 <img src='images/cucnn.png' style="max-width:100%">
 
@@ -11,6 +11,10 @@ The CNN consists of:
 - **Shared Depthwise Convolution Layer**: Applies a **shared** Depthwise Convolution Operation with a **4x4** kernel with `stride=4` on each channel of the previous Conv layer's output to output a map of `shape=4x4x6`.
 
 - **Fully Connected Layer**: Flattens the output from the previous layer to a layer with `10 nodes` with each node's value representing the probability of a digit from **0-9**.
+
+- Example of a convolution operation (**Sliding Window** is the kernel)
+
+	<img src='images/convolution.gif' style="max-width:100%">
 
 ## Implementation 
 
