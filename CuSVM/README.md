@@ -35,3 +35,7 @@ https://forums.developer.nvidia.com/t/no-project-templates-in-vs2017/69306
 - Open the .sln/.vcxproj file in Visual Studio.
 
 - Click on Build -> Build Solution and if the build is successful you can run it using Ctrl + F5.
+
+## Output
+
+ <img src='Images/Result.png' style="max-width:100%">
