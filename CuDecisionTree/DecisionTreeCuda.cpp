@@ -1,7 +1,3 @@
-//
-// Created by Bhushan Pagariya on 6/1/17.
-//
-
 #include <iostream>
 #include <vector>
 #include <math.h>
