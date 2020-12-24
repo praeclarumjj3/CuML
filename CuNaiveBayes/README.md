@@ -6,6 +6,11 @@ This folder contains the code for Naive Bayes algorithm implemented using CUDA.
 
 Follow the below instructions to test the code on google colab:
 
+-Set GPU as the hardware accelerator from the top menu using the following steps:
+
+  Runtime-> Change runtime type -> select GPU as hardware accelerator
+
+
 - Mount Google Drive to the colab notebook
 
 ```bash
@@ -17,12 +22,6 @@ drive.mount('/content/gdrive')
 
 ```bash
 ! git clone https://github.com/praeclarumjj3/CuML.git
-```
-
-- Set GPU as the hardware accelerator using the following steps:
-
-```bash
-Runtime-> Change runtime type -> select GPU as hardware accelerator
 ```
 
 - Navigate to the folder of the algorithm you wish to test
