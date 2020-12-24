@@ -16,7 +16,7 @@ drive.mount('/content/gdrive')
 
 - Navigate to the folder of the algorithm you want to test using:
 ```
-%cd /content/gdrive/My Drive/CuML/CuSVD
+%cd /content/gdrive/My Drive/CuML/CuDecisionTree
 ```
 
 - Compile the code using:
