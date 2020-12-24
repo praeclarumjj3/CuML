@@ -1,8 +1,26 @@
 # CuCNN
 
-A simple 3-layer CNN architecture implemented using CUDA framework.
+A simple 3-layer CNN architecture for **Image Classification** on [MNIST](http://yann.lecun.com/exdb/mnist/) implemented using CUDA.
 
 <img src='images/cucnn.png' style="max-width:100%">
+
+The CNN consists of:
+
+- **Convolution Layer**: Applies a Convolution Operation with `6` **5x5** kernels with `stride=1` on the input image to output a map of `shape=24x24x6`.
+
+- **Shared Depthwise Convolution Layer**: Applies a **shared** Depthwise Convolution Operation with a **4x4** kernel with `stride=4` on each channel of the previous Conv layer's output to output a map of `shape=6x6x6`.
+
+- **Fully Connected Layer**: Flattens the output from the previous layer to a layer with `10 nodes` with each node's value representing the probability of a digit from **0-9**.
+
+- Example of a convolution operation (**Sliding Window** is the kernel)
+
+	<img src='images/convolution.gif' style="max-width:100%">
+
+## Implementation 
+
+- Used simple **float multi-dimensional arrays** to implement the `parameter structures` (weights and biases) and outputs for the CNN.
+
+- The best performing kernel sizes are: **GridSize = 64, BlockSize = 64**, i.e, `kernel <<<64,64>>>`
 
 ## Code Structure
 
@@ -23,6 +41,8 @@ A simple 3-layer CNN architecture implemented using CUDA framework.
 ## Setup
 
 Steps to train and test the CNN on **Google Colab**.
+
+- Set `RunTime Type=GPU` from the `Runtime/Change Runtime Type` menu at the top.
 
 - Mount google drive to the colab notebook:
 
