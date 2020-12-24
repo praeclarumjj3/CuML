@@ -10,7 +10,7 @@ This repo contains code for various ML/DL algorithms/models implemented using **
 
 - [CuDecisionTree](https://github.com/praeclarumjj3/CuML/tree/master/CuDecisionTree): Contains the Decision Tree algorithm implemented using CUDA.
 
-- [CuNaiveBayes](https://github.com/praeclarumjj3/CuML/tree/master/CuNaiveBayes): Contains the Naive Bayes algorithm implemented using CUDA.
+- [CuKNN](https://github.com/praeclarumjj3/CuML/tree/master/CuKNN): Contains the k-Nearest Neighbour algorithm implemented using CUDA.
 
 - [CuSVD](https://github.com/praeclarumjj3/CuML/tree/master/CuSVD): Contains the SVD algorithm implemented using CUDA.
 
@@ -31,7 +31,7 @@ This repo contains code for various ML/DL algorithms/models implemented using **
 
 - **CuSVD**: Anurag Bansal 
 
-- **CuNaiveBayes**: Anushka Singh
+- **CuKNN**: Anushka Singh
 
 - **CuSVM**: Hardik Thami
 
