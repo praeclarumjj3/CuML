@@ -69,20 +69,6 @@ bool * binary_vector;
 int spam_length;
 int nonspam_length;
 
-void print_words_and_occurencies() {
-	for (size_t i = 0; i < words.size(); i++) {
-		cout << words[i] << " " << spam_occ[i] << " " << nonspam_occ[i] << endl;
-	}
-}
-
-void print_vectors() {
-	cout << "spam_length: " << spam_length << ", nonspamlength: " << nonspam_length << endl;
-	cout << "word_vector" << " " << "spam_vector" << " " << "nonspam_vector" << endl;
-	for (int i = 0; i < words.size(); i++) {
-		cout << word_vector[i] << " " << spam_vector[i] << " " << nonspam_vector[i] << endl;
-	}
-}
-
 void finish_vectors() {
 
 	word_vector = new string[words.size()];
@@ -118,47 +104,6 @@ void count_occurencies_length() {
 	}
 	nonspam_length = counter;
 	
-	spam_file.clear();
-	spam_file.seekg(0, ios::beg);
-	nonspam_file.clear();
-	nonspam_file.seekg(0, ios::beg);
-
-}
-
-
-void add_spam_training_examples() {
-	cout << "Add spam examples to the database (\"quit\" to exit function.)" << endl;
-	string spam_example = "";
-	cin.ignore();
-	do {
-		getline(cin, spam_example);
-		if (spam_example.compare("quit")) {
-			spam_file << spam_example << endl;
-		}
-		else {
-			break;
-		}
-	} while (spam_example.compare("quit"));
-	spam_file.clear();
-	spam_file.seekg(0, ios::beg);
-	nonspam_file.clear();
-	nonspam_file.seekg(0, ios::beg);
-}
-
-void add_nonspam_training_examples() {
-	cout << "Add nonspam examples to the database (\"quit\" to exit function.)" << endl;
-	string nonspam_example = "";
-	cin.ignore();
-	do {
-		getline(cin, nonspam_example);
-		if (nonspam_example.compare("quit")) {
-			nonspam_file << nonspam_example << endl;
-		}
-		else {
-			break;
-		}
-	} while (nonspam_example.compare("quit"));
-	cout << "haha" << endl;
 	spam_file.clear();
 	spam_file.seekg(0, ios::beg);
 	nonspam_file.clear();
@@ -409,18 +354,18 @@ void run_naive_bayes(bool gpu) {
 			/* words contains word */
 			int pos = distance(words.begin(), find(words.begin(), words.end(), word));
 			binary_vector[pos] = true;
-			known_words++;
+			known_words = known_words + 1;
 		}
 		else {
 			/* words does not contain word */
-			unknown_words++;
+			unknown_words= unknown_words + 1;
 		}
 
 		if (position == string::npos) {
 			break;
 		}
 	}
-	cout << "known_words: " << known_words << ", unkwnown_words: " << unknown_words << endl;
+	cout << "known_words: " << known_words << ", unknown_words: " << unknown_words << endl;
 
 	if (gpu) {
 		run_gpu();
@@ -434,9 +379,6 @@ void run_naive_bayes(bool gpu) {
 
 int main()
 {
-	// Init
-	bool perform = true;
-	bool ready = false;
 	spam_file.open("spam.txt", ios::in | ios::out | ios::app);
 	nonspam_file.open("nonspam.txt", ios::in | ios::out | ios::app);
 	if (spam_file.good()==false) {
@@ -450,63 +392,27 @@ int main()
 		return 0;
 	}
 	
+	create_words_vector();
+
 	cout << "Naive Bayes Classifier as a anti-spam filter" << endl;
 
 
 	int option;
-	while (perform) {
-		cout << endl << " ---- Choose action (number): ---- " << endl;
-		cout << "1. Add spam training examples. " << endl;
-		cout << "2. Add non spam training examples. " << endl;
-		cout << "3. Init Naive Bayes Algorithm." << endl;
-		cout << "4. Run Naive Bayes Classifier (CPU)." << endl;
-		cout << "5. Run Naive Bayes Classifier (GPU)." << endl;
-		cout << "6. Print words and their occurencies." << endl;
-		cout << "7. Print words and vectors" << endl;
-		cout << "8. Exit." << endl;
-		cin >> option;
-		switch (option) {
-		case 1:
-			add_spam_training_examples();
-			ready = false;
-			break;
-		case 2:
-			add_nonspam_training_examples();
-			ready = false;
-			break;
-		case 3:
-			create_words_vector();
-			ready = true;
-			break;
-		case 4:
-			if (ready) {
-				run_naive_bayes(false);
-			}
-			else {
-				cout << "Naive Bayes not initialized!" << endl;
-			}
-			break;
-		case 5:
-			if (ready) {
-				run_naive_bayes(true);
-			}
-			else {
-				cout << "Naive Bayes not initialized!" << endl;
-			}
-			break;
-		case 6:
-			print_words_and_occurencies();
-			break;
-		case 7:
-			print_vectors();
-			break;
-		case 8:
-			perform = false;
-			break;
-		default:
-			cout << "Wrong!" << endl;
-		}
+	cout << endl << " ---- Choose action (number): ---- " << endl;
+	cout << "1. Run Naive Bayes Classifier (CPU) Using User Input." << endl;
+	cout << "2. Run Naive Bayes Classifier (GPU) Using User Input." << endl;
+	cin >> option;
+	switch (option) {
+	case 1:
+		run_naive_bayes(false);
+		break;
+	case 2:
+		run_naive_bayes(true);
+		break;
+	default:
+		cout << "Wrong!" << endl;
 	}
+	
 
 	// close txt files
 	spam_file.close();
