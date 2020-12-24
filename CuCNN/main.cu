@@ -17,13 +17,12 @@ static Layer l_sharedConv = Layer(4*4, 1, 6*6*6);
 static Layer l_FC = Layer(6*6*6, 10, 10);
 
 static void learn();
-static unsigned int classify(double data[28][28]);
-static void test();
 static double forward_pass(double data[28][28]);
 static double back_pass();
+static unsigned int classify(double data[28][28]);
+static void test();
 
-static inline void loaddata()
-{
+static inline void loaddata(){
 	mnist_load("data/train-images.idx3-ubyte", "data/train-labels.idx1-ubyte",
 		&train_set, &train_cnt);
 	mnist_load("data/t10k-images.idx3-ubyte", "data/t10k-labels.idx1-ubyte",
